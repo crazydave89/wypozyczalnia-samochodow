@@ -1,8 +1,10 @@
 package pl.wypozyczalnia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class CarRental {
     // TODO logotyp
 
     @OneToMany(mappedBy = "car_rental")
+    @JsonIgnore
     private List<Department> departmentList = new ArrayList<>();
 
 }

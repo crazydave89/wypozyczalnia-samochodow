@@ -8,26 +8,37 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employee {
+public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employee_id;
+    private Long car_id;
+
     @NotBlank
-    private String firstName;
+    private String brand; //marka
     @NotBlank
-    private String lastName;
+    private String model;
     @NotNull
-    private Double salary;
+    private CarBodyType carBodyType;
+    @NotNull
+    private Integer productionYear;
+    @NotBlank
+    private String color;
+    @NotNull
+    private Double mileage; // przebieg
+    @NotNull
+    private RentStatus rentStatus;
+    @NotNull
+    private Double pricePerDay;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
     @JsonIgnore
     private Department department;
-
 }
