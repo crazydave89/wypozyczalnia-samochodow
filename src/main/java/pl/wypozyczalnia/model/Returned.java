@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -15,27 +16,20 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reservation {
+public class Returned {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reservation_id;
-
+    private Long return_id;
     @NotNull
-    private LocalDate reservationDate;
+    private Integer employee_id;
     @NotNull
-    private Integer client_id;
+    private LocalDate returnDate;
     @NotNull
-    private Integer car_id;
+    private Integer reservation_id;
     @NotNull
-    private LocalDate startDate;
-    @NotNull
-    private LocalDate stopDate;
-    @NotNull
-    private Integer loanDepartment; // department_id
-    @NotNull
-    private Integer returnDepartment; // department_id
-    @NotNull
-    private Double price;
+    private Double supplement; // dopłata
+    @NotBlank
+    private String returnComments;
 
 }
