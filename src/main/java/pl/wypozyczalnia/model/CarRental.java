@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +20,14 @@ public class CarRental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long car_rental_id;
-    private final String company_name = "Car Rental";
-    private final String domain = "http://localhost:8080";
-    private final String contactAddress = "Bydgoszcz ul. Grunwaldzka 5";
-    private final String owner = "Dawid Kamasz";
+    @NotBlank
+    private String company_name ;
+    @NotBlank
+    private String domain ;
+    @NotBlank
+    private String contactAddress ;
+    @NotBlank
+    private String owner ;
     // TODO logotyp
 
     @OneToMany(mappedBy = "car_rental")
