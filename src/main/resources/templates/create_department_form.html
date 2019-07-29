@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Car Rental create form</title>
+    <title>Department create form</title>
 
 
     <!-- Required meta tags -->
@@ -15,17 +15,14 @@
 
 <div class="container">
 
-<h1>Car Rental create form</h1>
+<h1>Department create form</h1>
 
-<form action="#" th:action="@{/carRentalForm/save}" th:object="${car_rental}" method="post">
+<form action="#" th:action="@{/addDepartment/save}" th:object="${department}" method="post">
 
-    <input type="hidden" th:field="*{car_rental_id}">
-    <input type="text"  th:field="*{company_name}" class="form-control mb-4 col-4" placeholder="Company Name">
-    <input type="text"  th:field="*{domain}" class="form-control mb-4 col-4" placeholder="Domain address">
-    <input type="text"  th:field="*{contactAddress}" class="form-control mb-4 col-4" placeholder="Contact address">
-    <input type="text"  th:field="*{owner}" class="form-control mb-4 col-4" placeholder="Owner">
+    <input type="hidden" th:field="*{department_id}">
+    <input type="text"  th:field="*{address}" class="form-control mb-4 col-4" placeholder="Address">
 
-    <button type="submit" class="btn btn-info col-2">Save</button>
+    <button type="submit" class="btn btn-info col-2">Create</button>
 
 </form>
 
