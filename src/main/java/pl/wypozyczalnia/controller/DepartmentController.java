@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import pl.wypozyczalnia.model.CarRental;
 import pl.wypozyczalnia.model.Department;
 import pl.wypozyczalnia.service.DepartmentService;
 

@@ -6,12 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.wypozyczalnia.model.CarRental;
 import pl.wypozyczalnia.model.Department;
 import pl.wypozyczalnia.service.CarRentalService;
 import pl.wypozyczalnia.service.DepartmentService;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -40,9 +39,19 @@ public class CarRentalController {
     }
 
     @GetMapping("/carRental")
-    public String showCarRentalControlPanel(Model model){
-        List<Department> departments = departmentService.getAllDepartment();
+    public String showCarRentalControlPanel(@RequestParam Long carRentalId, Model model){
+        CarRental carRental = carRentalService.findById(carRentalId);
+        List<Department> departments = carRental.getDepartmentList();
         model.addAttribute("departments",departments);
+        model.addAttribute("carRental",carRental);
         return "car_rental_control_panel";
+    }
+
+
+    @GetMapping("/carRentalList")
+    public String showCarRentalList(Model model){
+        List<CarRental> carRentalList = carRentalService.getCarRentalList();
+        model.addAttribute("carRentalList",carRentalList);
+        return "car_rental_list";
     }
 }
