@@ -24,4 +24,11 @@ public class DepartmentService {
     public void saveDepartment(Department department){
         departmentRepository.save(department);
     }
+    public void  deleteDepartmentById(Long id){
+        departmentRepository.deleteById(id);
+    }
+
+    public Department findById(Long id){
+        return departmentRepository.findById(id).get();
+    }
 }

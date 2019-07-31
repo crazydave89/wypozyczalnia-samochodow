@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Car Rental CONTROL PANEL</title>
+    <title>Department CONTROL PANEL</title>
 
 
     <!-- Required meta tags -->
@@ -16,26 +16,30 @@
 
 <div class="container">
 
-    <h1>Car Rental Control Panel</h1>
-    <a th:href="@{/addDepartment(carRentalId=${carRentalId})}" class="btn btn-info btn-sm">Create Department</a>
+    <h1>Department Control Panel</h1>
+<!--    <a th:href="@{/addDepartment(carRentalId=${carRentalId})}" class="btn btn-info btn-sm">Create Department</a>-->
 
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th>Departments</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Salary</th>
             <th> </th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="tempDepartment : ${departments}">
+        <tr th:each="tempEmpoyee : ${employeeList}">
 
-        <td th:text="${tempDepartment.address}"/>
+        <td th:text="${tempEmpoyee.firstName}"/>
+        <td th:text="${tempEmpoyee.lastName}"/>
+        <td th:text="${tempEmpoyee.salary}"/>
+<!--
             <td>
-                <a th:href="@{/department(departmentId=${tempDepartment.department_id})}"
-                   class="btn btn-info btn-sm">Manage</a>
                 <a th:href="@{/deleteDepartment(departmentId=${tempDepartment.department_id})}"
                    class="btn btn-danger btn-sm">Delete</a>
             </td>
+-->
 
         </tr>
 

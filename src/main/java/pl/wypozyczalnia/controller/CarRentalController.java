@@ -50,7 +50,6 @@ public class CarRentalController {
         CarRental carRental = carRentalService.findById(carRentalId);
         department.setCar_rental(carRental);
         model.addAttribute("department",department);
-       // model.addAttribute("carRent",carRental);
         return "create_department_form";
     }
 
