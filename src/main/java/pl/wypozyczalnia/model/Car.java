@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -25,6 +24,7 @@ public class Car {
     @NotBlank
     private String model;
     @NotNull
+    @Enumerated(value = EnumType.STRING)
     private CarBodyType carBodyType;
     @NotNull
     private Integer productionYear;
@@ -33,6 +33,7 @@ public class Car {
     @NotNull
     private Double mileage; // przebieg
     @NotNull
+    @Enumerated(value = EnumType.STRING)
     private RentStatus rentStatus;
     @NotNull
     private Double pricePerDay;
@@ -41,4 +42,18 @@ public class Car {
     @JoinColumn(name = "department_id")
     @JsonIgnore
     private Department department;
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", carBodyType=" + carBodyType +
+                ", productionYear=" + productionYear +
+                ", color='" + color + '\'' +
+                ", mileage=" + mileage +
+                ", rentStatus=" + rentStatus +
+                ", pricePerDay=" + pricePerDay +
+                '}';
+    }
 }

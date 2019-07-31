@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.wypozyczalnia.model.Car;
 import pl.wypozyczalnia.model.CarRental;
 import pl.wypozyczalnia.model.Department;
 import pl.wypozyczalnia.model.Employee;
+import pl.wypozyczalnia.service.CarService;
 import pl.wypozyczalnia.service.DepartmentService;
 
 import java.util.List;
@@ -15,11 +17,14 @@ import java.util.List;
 public class DepartmentController {
 
     private DepartmentService departmentService;
+    private CarService carService;
 
     @Autowired
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentController(DepartmentService departmentService, CarService carService) {
         this.departmentService = departmentService;
+        this.carService = carService;
     }
+
 
 
     @PostMapping("/addDepartment/save")
@@ -37,6 +42,8 @@ public class DepartmentController {
     public String showCarRentalControlPanel(@RequestParam Long departmentId, Model model){
         Department department = departmentService.findById(departmentId);
         List<Employee> employeeList = department.getEmployeeList();
+        List<Car> carList = carService.getAllByDepartment(department);
+        model.addAttribute("carList",carList);
         model.addAttribute("employeeList",employeeList);
         model.addAttribute("departmentId", departmentId);
         return "department_control_panel";

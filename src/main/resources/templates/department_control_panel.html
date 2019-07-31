@@ -15,11 +15,11 @@
 <body>
 
 <div class="container">
-
-    <h1>Department Control Panel</h1>
+<h1 align="center">Department Control Panel</h1><br>
+    <h2 align="center">List of Employees</h2>
     <a th:href="@{/addEmployeeForm(departmentId=${departmentId})}" class="btn btn-info btn-sm">Create Employee</a>
 
-    <table class="table table-bordered table-striped">
+    <table  class="table table-bordered table-striped">
         <thead>
         <tr>
             <th>First Name</th>
@@ -29,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="tempEmpoyee : ${employeeList}">
+        <tr  th:each="tempEmpoyee : ${employeeList}">
 
         <td th:text="${tempEmpoyee.firstName}"/>
         <td th:text="${tempEmpoyee.lastName}"/>
@@ -40,18 +40,43 @@
                 <a th:href="@{/department/deleteEmployee(employee_id=${tempEmpoyee.employee_id})}"
                    class="btn btn-danger btn-sm">Delete</a>
             </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+    <table  class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Body type</th>
+            <th>Production Year</th>
+            <th>Color</th>
+            <th>Mileage</th>
+            <th>PricePerDay</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempCar : ${carList}">
+
+            <td th:text="${tempCar.brand}"/>
+            <td th:text="${tempCar.model}"/>
+            <td th:text="${tempCar.carBodyType}"/>
+            <td th:datetime="${tempCar.productionYear}"/>
+            <td th:text="${tempCar.color}"/>
+            <td th:text="${tempCar.mileage}"/>
+            <td th:text="${tempCar.pricePerDay}"/>
 <!--
             <td>
-                <a th:href="@{/deleteDepartment(departmentId=${tempDepartment.department_id})}"
+                <a th:href="@{/addEmployeeForm/update(employee_id=${tempEmpoyee.employee_id})}"
+                   class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/department/deleteEmployee(employee_id=${tempEmpoyee.employee_id})}"
                    class="btn btn-danger btn-sm">Delete</a>
             </td>
 -->
-
         </tr>
-
         </tbody>
-
-
     </table>
 
 
