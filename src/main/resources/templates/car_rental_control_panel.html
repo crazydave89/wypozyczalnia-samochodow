@@ -17,7 +17,7 @@
 <div class="container">
 
     <h1>Car Rental Control Panel</h1>
-    <a th:href="@{/addDepartment}">Create Department</a>
+    <a th:href="@{/addDepartment(carRentalId=${carRentalId})}" class="btn btn-info btn-sm">Create Department</a>
 
     <table class="table table-bordered table-striped">
         <thead>

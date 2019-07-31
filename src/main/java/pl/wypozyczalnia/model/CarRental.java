@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -34,4 +33,13 @@ public class CarRental {
     @JsonIgnore
     private List<Department> departmentList = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "CarRental{" +
+                "company_name='" + company_name + '\'' +
+                ", domain='" + domain + '\'' +
+                ", contactAddress='" + contactAddress + '\'' +
+                ", owner='" + owner + '\'' +
+                '}';
+    }
 }

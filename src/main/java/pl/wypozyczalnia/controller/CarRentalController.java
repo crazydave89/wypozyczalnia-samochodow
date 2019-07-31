@@ -3,10 +3,7 @@ package pl.wypozyczalnia.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.wypozyczalnia.model.CarRental;
 import pl.wypozyczalnia.model.Department;
 import pl.wypozyczalnia.service.CarRentalService;
@@ -43,9 +40,20 @@ public class CarRentalController {
         CarRental carRental = carRentalService.findById(carRentalId);
         List<Department> departments = carRental.getDepartmentList();
         model.addAttribute("departments",departments);
-        model.addAttribute("carRental",carRental);
+        model.addAttribute("carRentalId", carRentalId);
         return "car_rental_control_panel";
     }
+
+    @GetMapping("/addDepartment")
+    public String showAddDepartmentForm(@RequestParam Long carRentalId, Model model){
+        Department department = new Department();
+        CarRental carRental = carRentalService.findById(carRentalId);
+        department.setCar_rental(carRental);
+        model.addAttribute("department",department);
+       // model.addAttribute("carRent",carRental);
+        return "create_department_form";
+    }
+
 
 
     @GetMapping("/carRentalList")
