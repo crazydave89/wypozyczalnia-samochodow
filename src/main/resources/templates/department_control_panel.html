@@ -34,6 +34,12 @@
         <td th:text="${tempEmpoyee.firstName}"/>
         <td th:text="${tempEmpoyee.lastName}"/>
         <td th:text="${tempEmpoyee.salary}"/>
+            <td>
+                <a th:href="@{/addEmployeeForm/update(employee_id=${tempEmpoyee.employee_id})}"
+                   class="btn btn-info btn-sm">Update</a>
+                <a th:href="@{/department/deleteEmployee(employee_id=${tempEmpoyee.employee_id})}"
+                   class="btn btn-danger btn-sm">Delete</a>
+            </td>
 <!--
             <td>
                 <a th:href="@{/deleteDepartment(departmentId=${tempDepartment.department_id})}"

@@ -20,11 +20,12 @@
 <form action="#" th:action="@{/addEmployeeForm/save}" th:object="${employee}" method="post">
 
     <input type="hidden" th:field="*{department}">
+    <input type="hidden" th:field="*{employee_id}">
     <input type="text"  th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First Name">
     <input type="text"  th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last Name">
     <input type="text"  th:field="*{salary}" class="form-control mb-4 col-4" placeholder="Salary">
 
-    <button type="submit" class="btn btn-info col-2">Add</button>
+    <button type="submit" class="btn btn-info col-2">Add/Update</button>
 
 </form>
 

@@ -18,4 +18,12 @@ public class EmployeeService {
     public void saveEmployee(Employee employee){
         employeeRepository.save(employee);
     }
+
+    public Employee findById(Long id){
+        return employeeRepository.findById(id).get();
+    }
+
+    public void deleteById(Long id){
+        employeeRepository.deleteById(id);
+    }
 }

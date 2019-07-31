@@ -36,4 +36,20 @@ public class EmployeeController {
         Long id = employee.getDepartment().getDepartment_id();
         return "redirect:/department?departmentId="+id;
     }
+
+    @GetMapping("/addEmployeeForm/update")
+    public String saveEmployee(@RequestParam Long employee_id, Model model){
+        Employee employee = employeeService.findById(employee_id);
+        model.addAttribute("employee",employee);
+        return "addEmployeeForm";
+    }
+
+    @GetMapping("/department/deleteEmployee")
+    public String deleteEmployee(@RequestParam Long employee_id){
+        Employee employee = employeeService.findById(employee_id);
+        Long id = employee.getDepartment().getDepartment_id();
+        employeeService.deleteById(employee_id);
+        return "redirect:/department?departmentId="+id;
+    }
+
 }
