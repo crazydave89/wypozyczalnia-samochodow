@@ -21,4 +21,12 @@ public class CarService {
     public List<Car> getAllByDepartment(Department department){
         return carRepository.findAllByDepartment(department);
     }
+
+    public void saveCar(Car car){
+        carRepository.save(car);
+    }
+
+    public Car findById(Long id){
+       return carRepository.findById(id).get();
+    }
 }

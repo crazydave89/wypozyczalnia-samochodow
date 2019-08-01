@@ -45,6 +45,8 @@
     </table>
     <br>
 
+    <a th:href="@{/addCarForm(departmentId=${departmentId})}" class="btn btn-info btn-sm">Add Car</a>
+
     <table  class="table table-bordered table-striped">
         <thead>
         <tr>
@@ -54,7 +56,10 @@
             <th>Production Year</th>
             <th>Color</th>
             <th>Mileage</th>
-            <th>PricePerDay</th>
+            <th>Price Per Day</th>
+            <th>Status</th>
+            <th></th>
+
         </tr>
         </thead>
         <tbody>
@@ -63,10 +68,15 @@
             <td th:text="${tempCar.brand}"/>
             <td th:text="${tempCar.model}"/>
             <td th:text="${tempCar.carBodyType}"/>
-            <td th:datetime="${tempCar.productionYear}"/>
+            <td th:text="${tempCar.productionYear}"/>
             <td th:text="${tempCar.color}"/>
             <td th:text="${tempCar.mileage}"/>
             <td th:text="${tempCar.pricePerDay}"/>
+            <td th:text="${tempCar.rentStatus}"/>
+            <td>
+                <a th:href="@{/addCarForm/update(car_id=${tempCar.car_id})}"
+                   class="btn btn-info btn-sm">Update</a>
+            </td>
 <!--
             <td>
                 <a th:href="@{/addEmployeeForm/update(employee_id=${tempEmpoyee.employee_id})}"
