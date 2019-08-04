@@ -19,7 +19,7 @@ public class CarRental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long car_rental_id;
-    @NotBlank
+    @NotBlank(message = "nie moze byc puste")
     private String company_name ;
     @NotBlank
     private String domain ;

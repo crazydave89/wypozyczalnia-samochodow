@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Car Rental create form</title>
+    <title>Create Employee form</title>
 
 
     <!-- Required meta tags -->
@@ -15,18 +15,17 @@
 
 <div class="container">
 
-<h1>Car Rental create form</h1>
+<h1>Create Employee form</h1>
 
-<form action="#" th:action="@{/carRentalForm/save}" th:object="${car_rental}" method="post">
+<form action="#" th:action="@{/register}" th:object="${client}" method="post">
 
-    <input type="hidden" th:field="*{car_rental_id}">
-    <input type="text"  th:field="*{company_name}" class="form-control mb-4 col-4" placeholder="Company Name">
-    <span th:errors="*{company_name}"></span>
-    <input type="text"  th:field="*{domain}" class="form-control mb-4 col-4" placeholder="Domain address">
-    <input type="text"  th:field="*{contactAddress}" class="form-control mb-4 col-4" placeholder="Contact address">
-    <input type="text"  th:field="*{owner}" class="form-control mb-4 col-4" placeholder="Owner">
+    <input type="text"  th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First Name">
+    <input type="text"  th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last Name">
+    <input type="text"  th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
+    <input type="text"  th:field="*{clientAddress}" class="form-control mb-4 col-4" placeholder="Address">
+    <input type="text"  th:field="*{password}" class="form-control mb-4 col-4" placeholder="Password">
 
-    <button type="submit" class="btn btn-info col-2">Save</button>
+    <button type="submit" class="btn btn-info col-2">Register</button>
 
 </form>
 

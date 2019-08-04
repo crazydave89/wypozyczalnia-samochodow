@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -30,5 +31,10 @@ public class Client {
     private String email;
     @NotBlank
     private String clientAddress;
+    @NotBlank
+    @Size(min = 6,message = "minimum 6 digits")
+    private String password;
+
+    private Boolean isActiv = true;
 
 }

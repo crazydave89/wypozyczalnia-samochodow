@@ -3,11 +3,14 @@ package pl.wypozyczalnia.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.wypozyczalnia.model.CarRental;
 import pl.wypozyczalnia.model.Department;
 import pl.wypozyczalnia.service.CarRentalService;
 import pl.wypozyczalnia.service.DepartmentService;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -30,7 +33,10 @@ public class CarRentalController {
     }
 
     @PostMapping("/carRentalForm/save")
-    public String createCarRental(@ModelAttribute("car_rental") CarRental car_rental){
+    public String createCarRental(@ModelAttribute("car_rental") @Valid CarRental car_rental, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "car_rental_form";
+        }
         carRentalService.createCarRental(car_rental);
         return "redirect:/";
     }
