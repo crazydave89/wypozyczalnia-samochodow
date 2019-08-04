@@ -20,10 +20,15 @@
 <form action="#" th:action="@{/register}" th:object="${client}" method="post">
 
     <input type="text"  th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First Name">
+    <span th:errors="*{firstName}"></span>
     <input type="text"  th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last Name">
+    <span th:errors="*{lastName}"></span>
     <input type="text"  th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
+    <span th:errors="*{email}"></span>
     <input type="text"  th:field="*{clientAddress}" class="form-control mb-4 col-4" placeholder="Address">
+    <span th:errors="*{clientAddress}"></span>
     <input type="text"  th:field="*{password}" class="form-control mb-4 col-4" placeholder="Password">
+    <span th:errors="*{password}"></span>
 
     <button type="submit" class="btn btn-info col-2">Register</button>
 
