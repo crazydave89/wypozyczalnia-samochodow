@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.wypozyczalnia.model.Car;
-import pl.wypozyczalnia.model.CarRental;
 import pl.wypozyczalnia.model.Department;
 import pl.wypozyczalnia.model.Employee;
 import pl.wypozyczalnia.service.CarService;
@@ -30,18 +30,21 @@ public class DepartmentController {
 
 
     @PostMapping("/addDepartment/save")
-    public String addDepartment(@ModelAttribute("department") @Valid Department department, BindingResult bindingResult){
+    public String addDepartment(@ModelAttribute("department") @Valid Department department, RedirectAttributes redirectAttributes, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return "create_department_form";
         }
         departmentService.saveDepartment(department);
-        return "redirect:/";
+        redirectAttributes.addAttribute("carRentalId",department.getCar_rental().getCar_rental_id());
+        return "redirect:/carRental";
     }
 
     @GetMapping("/deleteDepartment")
-    public String deleteDepartment(@RequestParam ("departmentId") Long id){
+    public String deleteDepartment(@RequestParam ("departmentId") Long id, RedirectAttributes redirectAttributes){
+        Department department = departmentService.findById(id);
         departmentService.deleteDepartmentById(id);
-        return "redirect:/";
+        redirectAttributes.addAttribute("carRentalId",department.getCar_rental().getCar_rental_id());
+        return "redirect:/carRental";
     }
     @GetMapping("/department")
     public String showDepartmentControlPanel(@RequestParam Long departmentId, Model model){
