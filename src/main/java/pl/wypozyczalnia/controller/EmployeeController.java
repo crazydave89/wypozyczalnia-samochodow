@@ -3,11 +3,14 @@ package pl.wypozyczalnia.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.wypozyczalnia.model.Department;
 import pl.wypozyczalnia.model.Employee;
 import pl.wypozyczalnia.service.DepartmentService;
 import pl.wypozyczalnia.service.EmployeeService;
+
+import javax.validation.Valid;
 
 @Controller
 public class EmployeeController {
@@ -31,7 +34,10 @@ public class EmployeeController {
     }
 
     @PostMapping("/addEmployeeForm/save")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee){
+    public String saveEmployee(@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "addEmployeeForm";
+        }
         employeeService.saveEmployee(employee);
         Long id = employee.getDepartment().getDepartment_id();
         return "redirect:/department?departmentId="+id;

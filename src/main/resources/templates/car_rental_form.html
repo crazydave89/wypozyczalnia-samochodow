@@ -23,8 +23,11 @@
     <input type="text"  th:field="*{company_name}" class="form-control mb-4 col-4" placeholder="Company Name">
     <span th:errors="*{company_name}"></span>
     <input type="text"  th:field="*{domain}" class="form-control mb-4 col-4" placeholder="Domain address">
+    <span th:errors="*{domain}"></span>
     <input type="text"  th:field="*{contactAddress}" class="form-control mb-4 col-4" placeholder="Contact address">
+    <span th:errors="*{contactAddress}"></span>
     <input type="text"  th:field="*{owner}" class="form-control mb-4 col-4" placeholder="Owner">
+    <span th:errors="*{owner}"></span>
 
     <button type="submit" class="btn btn-info col-2">Save</button>
 

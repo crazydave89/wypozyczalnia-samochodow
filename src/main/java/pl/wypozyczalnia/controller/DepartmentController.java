@@ -3,6 +3,7 @@ package pl.wypozyczalnia.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.wypozyczalnia.model.Car;
 import pl.wypozyczalnia.model.CarRental;
@@ -11,6 +12,7 @@ import pl.wypozyczalnia.model.Employee;
 import pl.wypozyczalnia.service.CarService;
 import pl.wypozyczalnia.service.DepartmentService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -28,7 +30,10 @@ public class DepartmentController {
 
 
     @PostMapping("/addDepartment/save")
-    public String addDepartment(@ModelAttribute("department") Department department){
+    public String addDepartment(@ModelAttribute("department") @Valid Department department, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "create_department_form";
+        }
         departmentService.saveDepartment(department);
         return "redirect:/";
     }
@@ -39,7 +44,7 @@ public class DepartmentController {
         return "redirect:/";
     }
     @GetMapping("/department")
-    public String showCarRentalControlPanel(@RequestParam Long departmentId, Model model){
+    public String showDepartmentControlPanel(@RequestParam Long departmentId, Model model){
         Department department = departmentService.findById(departmentId);
         List<Employee> employeeList = department.getEmployeeList();
         List<Car> carList = carService.getAllByDepartment(department);

@@ -7,16 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.wypozyczalnia.model.Car;
-import pl.wypozyczalnia.model.DTO.ReservationDto;
 import pl.wypozyczalnia.model.Department;
 import pl.wypozyczalnia.model.Reservation;
 import pl.wypozyczalnia.service.CarService;
 import pl.wypozyczalnia.service.DepartmentService;
 import pl.wypozyczalnia.service.ReservationService;
-
-import javax.validation.constraints.NotNull;
-import java.time.Duration;
-import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 

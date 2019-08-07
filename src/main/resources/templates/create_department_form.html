@@ -21,6 +21,8 @@
 
     <input type="hidden" th:field="*{car_rental}">
     <input type="text"  th:field="*{address}" class="form-control mb-4 col-4" placeholder="Address">
+    <span th:errors="*{address}"></span>
+
 
     <button type="submit" class="btn btn-info col-2">Create</button>
 

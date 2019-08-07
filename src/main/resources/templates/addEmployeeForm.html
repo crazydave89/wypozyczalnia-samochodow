@@ -22,8 +22,12 @@
     <input type="hidden" th:field="*{department}">
     <input type="hidden" th:field="*{employee_id}">
     <input type="text"  th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First Name">
+    <span th:errors="*{firstName}"></span>
     <input type="text"  th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last Name">
+    <span th:errors="*{lastName}"></span>
     <input type="text"  th:field="*{salary}" class="form-control mb-4 col-4" placeholder="Salary">
+    <span th:errors="*{salary}"></span>
+
 
     <button type="submit" class="btn btn-info col-2">Add/Update</button>
 

@@ -3,6 +3,7 @@ package pl.wypozyczalnia.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.wypozyczalnia.model.*;
 import pl.wypozyczalnia.service.CarService;
 import pl.wypozyczalnia.service.DepartmentService;
+
+import javax.validation.Valid;
 
 @Controller
 public class CarController {
@@ -24,7 +27,7 @@ public class CarController {
     }
 
     @GetMapping("/addCarForm")
-    public String showAddEmployeeForm(@RequestParam Long departmentId, Model model){
+    public String showAddCarForm(@RequestParam Long departmentId, Model model){
         Department department = departmentService.findById(departmentId);
         Car car = new Car();
         car.setDepartment(department);
@@ -35,13 +38,19 @@ public class CarController {
     }
 
     @PostMapping("/addCarForm/save")
-    public String addDepartment(@ModelAttribute("car") Car car){
+    public String addCar(@ModelAttribute("car") @Valid Car car, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()){
+            model.addAttribute("car", car);
+            model.addAttribute("carBodyType", CarBodyType.values());
+            model.addAttribute("rentStatus", RentStatus.values());
+            return "addCarForm";
+        }
         carService.saveCar(car);
         return "redirect:/";
     }
 
     @GetMapping("/addCarForm/update")
-    public String saveEmployee(@RequestParam Long car_id, Model model){
+    public String updateCarForm(@RequestParam Long car_id, Model model){
         Car car = carService.findById(car_id);
         model.addAttribute("car",car);
         model.addAttribute("carBodyType",CarBodyType.values());

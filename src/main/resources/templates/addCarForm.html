@@ -22,7 +22,9 @@
     <input type="hidden" th:field="*{department}">
     <input type="hidden" th:field="*{car_id}">
     <input type="text"  th:field="*{brand}" class="form-control mb-4 col-4" placeholder="Brand">
+    <span th:errors="*{brand}"></span>
     <input type="text"  th:field="*{model}" class="form-control mb-4 col-4" placeholder="Model">
+    <span th:errors="*{model}"></span>
     <label for="carBodyType">Body type</label><br>
     <select id="carBodyType" class="form-control mb-4 col-4" th:field="*{carBodyType}">
         <option th:each="c : ${carBodyType}"
@@ -31,8 +33,11 @@
         </option>
     </select>
     <input type="number"  th:field="*{productionYear}" class="form-control mb-4 col-4" placeholder="Production year">
+    <span th:errors="*{productionYear}"></span>
     <input type="text"  th:field="*{color}" class="form-control mb-4 col-4" placeholder="Color">
+    <span th:errors="*{color}"></span>
     <input type="number"  th:field="*{mileage}" class="form-control mb-4 col-4" placeholder="Mileage">
+    <span th:errors="*{mileage}"></span>
     <label for="rentStatus">Status</label><br>
     <select id="rentStatus" class="form-control mb-4 col-4" th:field="*{rentStatus}">
         <option th:each="c : ${rentStatus}"
@@ -41,6 +46,7 @@
         </option>
     </select>
     <input type="number"  th:field="*{pricePerDay}" class="form-control mb-4 col-4" placeholder="Price per day">
+    <span th:errors="*{pricePerDay}"></span>
 
     <button type="submit" class="btn btn-info col-2">Add/Update</button>
 
