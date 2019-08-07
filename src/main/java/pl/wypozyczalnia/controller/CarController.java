@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.wypozyczalnia.model.*;
 import pl.wypozyczalnia.service.CarService;
 import pl.wypozyczalnia.service.DepartmentService;
@@ -38,15 +39,16 @@ public class CarController {
     }
 
     @PostMapping("/addCarForm/save")
-    public String addCar(@ModelAttribute("car") @Valid Car car, BindingResult bindingResult, Model model){
+    public String addCar(@ModelAttribute("car") @Valid Car car, RedirectAttributes redirectAttributes, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){
             model.addAttribute("car", car);
             model.addAttribute("carBodyType", CarBodyType.values());
             model.addAttribute("rentStatus", RentStatus.values());
             return "addCarForm";
         }
+        redirectAttributes.addAttribute("departmentId",car.getDepartment().getDepartment_id());
         carService.saveCar(car);
-        return "redirect:/";
+        return "redirect:/department";
     }
 
     @GetMapping("/addCarForm/update")
