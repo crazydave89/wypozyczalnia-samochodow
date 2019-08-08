@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.wypozyczalnia.model.Car;
+import pl.wypozyczalnia.model.CarRental;
 import pl.wypozyczalnia.model.Department;
 import pl.wypozyczalnia.model.Reservation;
+import pl.wypozyczalnia.service.CarRentalService;
 import pl.wypozyczalnia.service.CarService;
 import pl.wypozyczalnia.service.DepartmentService;
 import pl.wypozyczalnia.service.ReservationService;
@@ -21,18 +23,21 @@ public class ReservationController {
     private ReservationService reservationService;
     private CarService carService;
     private DepartmentService departmentService;
+    private CarRentalService carRentalService;
 
     @Autowired
-    public ReservationController(ReservationService reservationService, CarService carService, DepartmentService departmentService) {
+    public ReservationController(ReservationService reservationService, CarService carService, DepartmentService departmentService, CarRentalService carRentalService) {
         this.reservationService = reservationService;
         this.carService = carService;
         this.departmentService = departmentService;
+        this.carRentalService = carRentalService;
     }
 
     @GetMapping("/reservation")
     public String createReservation(Model model){
         Reservation reservation = new Reservation();
-        List<Department> departmentList = departmentService.getAllDepartment();
+        CarRental carRental = carRentalService.findById(1L);
+        List<Department> departmentList = carRental.getDepartmentList();
         model.addAttribute("departmentList",departmentList);
         model.addAttribute("reservation", reservation);
         return "reservationForm";
@@ -53,7 +58,7 @@ public class ReservationController {
         Period until = reservation.getStartDate().until(reservation.getStopDate());
         Long daysAmount = Long.valueOf(until.getDays());
         Car car = carService.findById((Long.valueOf(reservation.getCar_id())));
-        Double finalPrice = car.getPricePerDay()*(daysAmount+1);
+        Double finalPrice = car.getPricePerDay()*(daysAmount);
         reservation.setPrice(finalPrice);
         model.addAttribute("reservation", reservation);
         model.addAttribute("finalPrice", finalPrice);
