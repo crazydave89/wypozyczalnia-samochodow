@@ -25,17 +25,17 @@ public class Reservation {
     @NotNull
     private LocalDate reservationDate = LocalDate.now();
     @NotNull
-    private Integer client_id;
+    private Long client_id;
     @NotNull
-    private Integer car_id;
+    private Long car_id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate stopDate;
     @NotNull
-    private Integer loanDepartment; // department_id
+    private Long loanDepartment; // department_id
     @NotNull
-    private Integer returnDepartment; // department_id
+    private Long returnDepartment; // department_id
     @NotNull
     private Double price;
 

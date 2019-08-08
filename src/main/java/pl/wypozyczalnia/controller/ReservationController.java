@@ -14,6 +14,8 @@ import pl.wypozyczalnia.service.CarRentalService;
 import pl.wypozyczalnia.service.CarService;
 import pl.wypozyczalnia.service.DepartmentService;
 import pl.wypozyczalnia.service.ReservationService;
+
+import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
@@ -45,9 +47,20 @@ public class ReservationController {
 
     @GetMapping("/reservation/getCars")
     public String createReservationGetCars(@ModelAttribute Reservation reservation, Model model){
-        Long loanDepartmentId = Long.valueOf(reservation.getLoanDepartment());
+        Long loanDepartmentId = reservation.getLoanDepartment();
         Department loanDepartment = departmentService.findById(loanDepartmentId);
         List<Car> carList = carService.getAllByDepartment(loanDepartment);
+
+        LocalDate startDate = reservation.getStartDate();
+        List<Reservation> reservationList = reservationService.findAllByLoanDepartment(loanDepartmentId);
+        for (Reservation res1 : reservationList) {
+            if ((res1.getStartDate().isBefore(startDate)&&res1.getStopDate().isAfter(startDate))||(res1.equals(startDate))){
+                Car car = carService.findById(res1.getCar_id());
+                carList.remove(car);
+            }
+        }
+
+
         model.addAttribute("reservation", reservation);
         model.addAttribute("carList",carList);
         return "reservationForm";
@@ -57,7 +70,7 @@ public class ReservationController {
     public String createReservationCalculate(@ModelAttribute Reservation reservation, Model model){
         Period until = reservation.getStartDate().until(reservation.getStopDate());
         Long daysAmount = Long.valueOf(until.getDays());
-        Car car = carService.findById((Long.valueOf(reservation.getCar_id())));
+        Car car = carService.findById((reservation.getCar_id()));
         Double finalPrice = car.getPricePerDay()*(daysAmount);
         reservation.setPrice(finalPrice);
         model.addAttribute("reservation", reservation);
