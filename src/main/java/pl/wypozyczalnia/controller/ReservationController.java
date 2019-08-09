@@ -52,9 +52,14 @@ public class ReservationController {
         List<Car> carList = carService.getAllByDepartment(loanDepartment);
 
         LocalDate startDate = reservation.getStartDate();
+        LocalDate stopDate = reservation.getStopDate();
         List<Reservation> reservationList = reservationService.findAllByLoanDepartment(loanDepartmentId);
         for (Reservation res1 : reservationList) {
-            if ((res1.getStartDate().isBefore(startDate)&&res1.getStopDate().isAfter(startDate))||(res1.equals(startDate))){
+            if ((res1.getStartDate().isBefore(startDate)&&res1.getStopDate().isAfter(startDate))||(res1.getStartDate().equals(startDate))||startDate.equals(stopDate)){
+                Car car = carService.findById(res1.getCar_id());
+                carList.remove(car);
+            }
+            else if ((res1.getStartDate().isBefore(stopDate)&&res1.getStopDate().isAfter(stopDate))&&res1.getStartDate().isAfter(startDate)){
                 Car car = carService.findById(res1.getCar_id());
                 carList.remove(car);
             }
